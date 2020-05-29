@@ -28,7 +28,7 @@ turnaround = False
 compra = False
 #get_order("FB",400,"buy","market","gtc")
 
-total = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=FB&interval=1min&apikey=TZXBXLAS01S8CW10").json()
+total = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=FB&interval=1min&apikey=(your_alpha_vantsge_key)").json()
 date = total['Meta Data']['3. Last Refreshed']
 total = float(total['Time Series (1min)'][date]['4. close'])
 beneficio = 0
@@ -40,12 +40,12 @@ while True:
 	hour = time.localtime()[3]
 	timenow = str(time.localtime()[3]) + "-" + str(time.localtime()[4]) + "-" + str(time.localtime()[5])
 	if sec == 10:
-		SMA = requests.get("https://www.alphavantage.co/query?function=SMA&symbol=FB&interval=1min&time_period=7&series_type=open&apikey=TZXBXLAS01S8CW10").json()
+		SMA = requests.get("https://www.alphavantage.co/query?function=SMA&symbol=FB&interval=1min&time_period=7&series_type=open&apikey=(your_alpha_vantsge_key)").json()
 		date = SMA['Meta Data']['3: Last Refreshed']
 		SMA7 = SMA['Technical Analysis: SMA'][date[:-3]]['SMA']
-		SMA29 = requests.get("https://www.alphavantage.co/query?function=SMA&symbol=FB&interval=1min&time_period=29&series_type=open&apikey=TZXBXLAS01S8CW10").json()
+		SMA29 = requests.get("https://www.alphavantage.co/query?function=SMA&symbol=FB&interval=1min&time_period=29&series_type=open&apikey=(your_alpha_vantsge_key)").json()
 		SMA29 = SMA29['Technical Analysis: SMA'][date[:-3]]['SMA']
-		PRICE = float(requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=FB&interval=1min&apikey=TZXBXLAS01S8CW10").json()['Time Series (1min)'][date]['4. close'])
+		PRICE = float(requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=FB&interval=1min&apikey=(your_alpha_vantsge_key)").json()['Time Series (1min)'][date]['4. close'])
 
 		percent = (PRICE - total)/total
 
